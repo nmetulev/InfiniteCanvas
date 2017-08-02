@@ -1,0 +1,24 @@
+﻿<Page
+    x:Class="InfiniteCanvas.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:InfiniteCanvas"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer
+            HorizontalScrollBarVisibility="Auto"
+            HorizontalScrollMode="Auto"
+            Tapped="MainCanvas_Tapped"
+            VerticalScrollBarVisibility="Auto"
+            VerticalScrollMode="Auto"
+            ZoomMode="Enabled">
+            <Grid x:Name="Root">
+                <Canvas x:Name="MainCanvas" />
+                <!--<InkCanvas x:Name="Inker" IsHitTestVisible="True" />-->
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>
