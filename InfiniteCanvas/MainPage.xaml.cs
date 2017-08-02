@@ -52,7 +52,7 @@ namespace InfiniteCanvas
             RichEditBox box = new RichEditBox();
             box.Width = Root.Width > 500 ? Math.Min(Root.ActualWidth / 2, 500) : Root.Width;
             box.LostFocus += Box_LostFocus;
-            box.SizeChanged += Box_SizeChanged
+            box.SizeChanged += Box_SizeChanged;
             Canvas.SetLeft(box, position.X);
             Canvas.SetTop(box, position.Y);
 
