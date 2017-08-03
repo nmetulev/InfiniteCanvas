@@ -17,7 +17,7 @@
             ZoomMode="Enabled">
             <Grid x:Name="Root">
                 <Canvas x:Name="MainCanvas" />
-                <!--<InkCanvas x:Name="Inker" IsHitTestVisible="True" />-->
+                <InkCanvas x:Name="Inker" IsHitTestVisible="False" />
             </Grid>
         </ScrollViewer>
     </Grid>

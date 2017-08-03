@@ -30,6 +30,16 @@ namespace InfiniteCanvas
             SizeChanged += MainPage_SizeChanged;
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            Inker.InkPresenter.StrokesCollected += InkPresenter_StrokesCollected;
+        }
+
+        private void InkPresenter_StrokesCollected(Windows.UI.Input.Inking.InkPresenter sender, Windows.UI.Input.Inking.InkStrokesCollectedEventArgs args)
+        {
+            AdjustCanvasSize();
+        }
+
         private void MainPage_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (e.NewSize.Height + _pixelOverflow > Root.ActualHeight)
@@ -53,6 +63,8 @@ namespace InfiniteCanvas
             box.Width = Root.Width > 500 ? Math.Min(Root.ActualWidth / 2, 500) : Root.Width;
             box.LostFocus += Box_LostFocus;
             box.SizeChanged += Box_SizeChanged;
+            box.Style = App.Current.Resources["InfiniteRichEditBoxStyle"] as Style;
+
             Canvas.SetLeft(box, position.X);
             Canvas.SetTop(box, position.Y);
 
@@ -93,6 +105,10 @@ namespace InfiniteCanvas
                 if (point.X + element.ActualWidth > maxLeft) maxLeft = point.X + element.ActualWidth;
                 if (point.Y + element.ActualHeight > maxTop) maxTop = point.Y + element.ActualHeight;
             }
+
+            var inkBounds = Inker.InkPresenter.StrokeContainer.BoundingRect;
+            if (inkBounds.Width + inkBounds.Left > maxLeft) maxLeft = inkBounds.Width + inkBounds.Left;
+            if (inkBounds.Height + inkBounds.Top > maxTop) maxTop = inkBounds.Height + inkBounds.Top;
 
             Root.Width = maxLeft + _pixelOverflow;
             Root.Height = maxTop + _pixelOverflow;
